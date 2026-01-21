@@ -6,7 +6,7 @@ if (Number.isNaN(input) || input <= 0) {
 }
 for(let i = 1; i <= input; i++) {
     let result = '';
-    for (let k = input - i - 2; k > 0; k--) {
+    for (let k = input - i; k > 0; k--) {
         result += ' '
     }
     for (let j = i; j > 0; j--) {
