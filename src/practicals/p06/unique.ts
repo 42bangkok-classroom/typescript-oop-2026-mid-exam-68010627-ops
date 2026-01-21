@@ -1,15 +1,17 @@
-function getUniqueNumbers(arr1: number[], arr2: number[]): number[] {
-  const combined = [...arr1, ...arr2];
-  const result: number[] = [];
+export function getUniqueNumbers(arr1: number[], arr2: number[]): number[] {
+  // นับจำนวนครั้งของตัวเลขทั้งหมด
+  const count = new Map<number, number>();
 
-  for (const num of combined) {
-    const count =
-      combined.filter(n => n === num).length;
-
-    if (count === 1) {
-      result.push(num);
-    }
+  for (const n of arr1) {
+    count.set(n, (count.get(n) ?? 0) + 1);
   }
 
-  return result;
+  for (const n of arr2) {
+    count.set(n, (count.get(n) ?? 0) + 1);
+  }
+
+  // unique = ปรากฏครั้งเดียวเท่านั้น
+  return [...count.entries()]
+    .filter(([_, c]) => c === 1)
+    .map(([n]) => n);
 }
