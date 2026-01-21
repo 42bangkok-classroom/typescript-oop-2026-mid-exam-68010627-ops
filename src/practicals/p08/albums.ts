@@ -1,19 +1,20 @@
 const PHOTOS_URL = 'https://jsonplaceholder.typicode.com/photos';
 const ALBUMS_URL = 'https://jsonplaceholder.typicode.com/albums';
 
-type Album = {
-  userId: number;
-  id: number;
-  title: string;
-};
-
-type Photo = {
+export interface Photo {
   albumId: number;
   id: number;
   title: string;
   url: string;
   thumbnailUrl: string;
-};
+}
+
+export interface FullAlbum {
+  userId: number;
+  id: number;
+  title: string;
+  photos: Photo[];
+}
 
 export async function mapPhotoToAlbum(userIds?: number[]): Promise<(Album & { photos: Photo[] })[]> {
   if (!userIds || userIds.length === 0) {
