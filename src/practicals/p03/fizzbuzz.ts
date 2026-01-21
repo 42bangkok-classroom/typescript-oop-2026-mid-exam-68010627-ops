@@ -1,7 +1,7 @@
 // Write your code below
 const n: number = parseFloat(process.argv[2]);
 if(isNaN(n)|| n < 1 ||!Number.isInteger(n)){
-    process.exit()
+    // process.exit()
 }
 else{
     for(let i = 1;i<=n;i++){
