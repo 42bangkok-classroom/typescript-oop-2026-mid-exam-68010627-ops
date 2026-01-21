@@ -4,7 +4,7 @@ export interface Person {
   age?: number;
 }
 
-function sortPersons(persons: Person[]): Person[] {
+export function sortPersons(persons: Person[]): Person[] {
   return persons
     .filter(
       p =>
