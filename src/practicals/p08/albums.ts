@@ -1,39 +1,48 @@
 const PHOTOS_URL = 'https://jsonplaceholder.typicode.com/photos';
 const ALBUMS_URL = 'https://jsonplaceholder.typicode.com/albums';
 
-// function mapPhotoToAlbum(userIds?: number[]): Promise<FullAlbum[]>
-
-export interface FullAlbum {
+type Album = {
   userId: number;
   id: number;
   title: string;
-  photos: any[];
-}
+};
 
-export async function mapPhotoToAlbum(userIds?: number[]): Promise<FullAlbum[]> {
+type Photo = {
+  albumId: number;
+  id: number;
+  title: string;
+  url: string;
+  thumbnailUrl: string;
+};
+
+export async function mapPhotoToAlbum(userIds?: number[]): Promise<(Album & { photos: Photo[] })[]> {
+  if (!userIds || userIds.length === 0) {
+    return [];
+  }
+
   try {
-    if (!Array.isArray(userIds) || userIds.length === 0) {
-      return [];
-    }
-
     const albumsRes = await fetch(ALBUMS_URL);
     const photosRes = await fetch(PHOTOS_URL);
 
-    const albums = await albumsRes.json();
-    const photos = await photosRes.json();
+    if (!albumsRes.ok || !photosRes.ok) {
+      return [];
+    }
 
-    return albums
-      .filter(
-        (album: any) =>
-          userIds.includes(album.userId)
-      )
-      .map((album: any) => ({
-        ...album,
-        photos: photos.filter(
-          (photo: any) => photo.albumId === album.id
-        )
-      }));
+    const albums: Album[] = await albumsRes.json();
+    const photos: Photo[] = await photosRes.json();
+
+    // 🔑 filter albums เฉพาะ userIds ที่ส่งมา
+    const filteredAlbums = albums.filter(a =>
+      userIds.includes(a.userId)
+    );
+
+    // 🔑 map photos เข้า album ทีละอัน
+    return filteredAlbums.map(album => ({
+      ...album,
+      photos: photos.filter(p => p.albumId === album.id),
+    }));
   } catch {
+    // 🔥 test นี้สำคัญมาก
     return [];
   }
 }
