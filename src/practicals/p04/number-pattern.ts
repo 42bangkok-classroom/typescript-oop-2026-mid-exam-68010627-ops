@@ -7,7 +7,7 @@ if (Number.isNaN(input) || input <= 0) {
 for(let i = 0; i <= input; i++) {
     let result = '';
     for (let k = input - i; k > 0; k--) {
-        result += ' '
+        result = ' '
     }
     for (let j = i; j >= 1; j--) {
         result += j
