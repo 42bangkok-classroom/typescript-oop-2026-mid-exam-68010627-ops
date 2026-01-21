@@ -1,10 +1,10 @@
 // Write your code below
-const input = process.argv[2];
+const score = process.argv[2];
 
-if (input === undefined || input.trim() === "") {
+if (score === undefined || score.trim() === "") {
   console.log("Invalid input");
 } else {
-  const point = Number(input);
+  const point = Number(score);
 
   if (Number.isNaN(point) || point < 0 || point > 100) {
     console.log("Invalid input");
