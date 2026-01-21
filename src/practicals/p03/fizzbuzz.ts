@@ -13,7 +13,7 @@ else{
             console.log('Buzz');
         }
         else{
-            console.log(`${i}`);
+            console.log(i);
         }
         }
     }
