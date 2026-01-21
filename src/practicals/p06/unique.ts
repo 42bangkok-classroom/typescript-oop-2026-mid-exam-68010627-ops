@@ -1,6 +1,15 @@
 function getUniqueNumbers(arr1: number[], arr2: number[]): number[] {
-  // Write your code below
-}
+  const combined = [...arr1, ...arr2];
+  const result: number[] = [];
 
-const arr1 = [1, 2, 3, 4];
-const arr2 = [3, 4, 5, 6];
+  for (const num of combined) {
+    const count =
+      combined.filter(n => n === num).length;
+
+    if (count === 1) {
+      result.push(num);
+    }
+  }
+
+  return result;
+}

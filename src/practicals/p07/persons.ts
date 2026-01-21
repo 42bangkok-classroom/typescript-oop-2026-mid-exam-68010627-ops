@@ -4,15 +4,23 @@ interface Person {
   age?: number;
 }
 
-function sortPersons(persons: Person[]): Person[] {}
-
-
-const persons: Person[] = [
-  { firstName: "Somchai", lastName: "Jaidee", age: 30 },
-  { firstName: "", lastName: "Test", age: 20 },
-  { firstName: "Anan", lastName: "Sukjai", age: 25 },
-  { firstName: "Somchai", lastName: "Dee", age: 25 },
-  { firstName: "John", lastName: "Doe", age: 150 },
-  { firstName: "Jane", lastName: "Smith", age: -5 },
-  { lastName: "NoName", age: 40 }
-];
+function sortPersons(persons: Person[]): Person[] {
+  return persons
+    .filter(
+      p =>
+        typeof p.firstName === "string" &&
+        p.firstName !== "" &&
+        typeof p.lastName === "string" &&
+        p.lastName !== "" &&
+        typeof p.age === "number" &&
+        p.age >= 0 &&
+        p.age <= 100
+    )
+    .sort((a, b) => {
+      if (a.age !== b.age) return a.age! - b.age!;
+      if (a.firstName !== b.firstName) {
+        return a.firstName!.localeCompare(b.firstName!);
+      }
+      return a.lastName!.localeCompare(b.lastName!);
+    });
+}
