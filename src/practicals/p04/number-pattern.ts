@@ -10,7 +10,7 @@ for(let i = 0; i <= input; i++) {
         result += ' '
     }
     for (let j = i; j > 0; j--) {
-        result += j
+        result += (`${j}`)
     }
     result += '\n'
 }
