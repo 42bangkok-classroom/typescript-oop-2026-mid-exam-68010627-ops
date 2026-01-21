@@ -9,7 +9,7 @@ for(let i = 0; i <= input; i++) {
     for (let k = input - i; k > 0; k--) {
         result += ' '
     }
-    for (let j = i; j >= 1; j--) {
+    for (let j = i; j > 0; j--) {
         result += j
     }
     console.log(result)
